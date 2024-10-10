@@ -7,12 +7,13 @@
         <input [(ngModel)]="newTask" (keydown.enter)="addTask()" placeholder="הוסף משימה חדשה">
         
         <h6 class="date" *ngIf="taskDate">{{ taskDate }}</h6>
-        <ul>
+        <ul [ngClass]="{'task-list': tasks.length > 0, 'empty': tasks.length === 0}">
     
             <li *ngFor="let task of tasks">
-                <button class="remove-button" (click)="removeTask(task)">X</button>
+                <input type="checkbox" [(ngModel)]="task.completed" />   
                 <span [ngClass]="{ 'completed' : task.completed}"> {{ task.name }}</span>
-                <input type="checkbox" [(ngModel)]="task.completed" />                    
+                <button class="remove-button" (click)="removeTask(task)">X</button>
+                                 
             </li>
         </ul>
 

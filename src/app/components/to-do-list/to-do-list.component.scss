@@ -68,17 +68,44 @@ input {
     text-align: end; 
 }
 
-ul {
+
+/* קונטיינר שמקבל את המסגרת רק אם יש משימות */
+ul.task-list {
     list-style-type: none;
+    padding: 10px;
+    border: 1px solid lightgray; 
+    border-radius: 5px; 
+    background-color: rgba(255, 255, 255, 0.8);
+    margin: 20px 0; 
+    width: fit-content; 
+    text-align: right; 
+    margin-left: auto; 
+    direction: rtl; 
+}
+
+
+li {
+    display: flex;
+    justify-content: flex-start;
+    padding: 5px; 
+    border-bottom: 1px solid lightgray;
+    width: 100%; 
+    text-align: right; 
+    direction: rtl; 
+}
+
+/* אין גבול לפריט האחרון */
+li:last-child {
+    border-bottom: none;
+}
+
+/* מסתירים את הקונטיינר לפני שיש משימות */
+ul.task-list.empty {
+    border: none;
+    background: none;
     padding: 0;
 }
 
-li {
-    display: flexbox; 
-    justify-content: space-between; 
-    align-items: center; 
-    text-align: end; 
-}
 
 .remove-button {
     background: none; 
@@ -87,7 +114,7 @@ li {
     font-size: 7px; 
     cursor: pointer; 
     padding: 0; 
-    margin: 0; 
+    margin-right: 15px 
 }
 
 .remove-button:hover {
