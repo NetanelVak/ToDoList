@@ -1,0 +1,143 @@
+@font-face {
+    font-family: 'YehudaCLM';
+    src: url("../../../assets/yehuda/yehudaclm-bold-webfont.woff") format('woff'),
+         url("../../../assets/yehuda/yehudaclm-light-webfont.woff") format('woff');
+    font-weight: bold; 
+    font-style: normal; 
+}
+
+@font-face {
+    font-family: 'YehudaCLM';
+    src: url("../../../assets/yehuda/yehudaclm-light-webfont.woff") format('woff');
+    font-weight: normal; 
+    font-style: normal; 
+}
+
+
+
+/* הגדרת הקונטיינר עם תמונת רקע */
+.background-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+.background-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../../assets/toDoIlustration.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 8%;
+    z-index: -1; 
+}
+
+
+.container {
+    position: relatכive;
+    height: 100vh;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    z-index: 1; 
+    font-family: 'YehudaCLM', sans-serif;
+    
+}
+
+
+.completed {
+    text-decoration: line-through;
+}
+
+input {
+    direction: rtl; 
+    text-align: right; 
+    padding-right: 50px; 
+    box-sizing: border-box; 
+    margin-left: 10px;
+}
+
+.date{
+    display: flexbox; 
+    justify-content: space-between; 
+    align-items: center; 
+    text-align: end; 
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    display: flexbox; 
+    justify-content: space-between; 
+    align-items: center; 
+    text-align: end; 
+}
+
+.remove-button {
+    background: none; 
+    border: none; 
+    color: darkgray;
+    font-size: 7px; 
+    cursor: pointer; 
+    padding: 0; 
+    margin: 0; 
+}
+
+.remove-button:hover {
+    color: red; 
+    
+}
+
+.list-button {
+    display: flex; 
+    justify-content: flex-end; 
+    align-items: center; 
+    text-align: right; 
+    margin-top: 10px; 
+
+}
+
+.list-button button {
+    font-size: 0.5rem; 
+    padding: 3px 6px; 
+    border: none; 
+    cursor: pointer; 
+    margin-left: 5px; 
+    border-radius: 5%;
+}
+
+.archive-drop-button:hover {
+    color: red;
+ 
+}
+
+.clear-list-button:hover {
+    color: red;
+
+}
+
+.archive-button {
+
+        display: flex; 
+        justify-content: flex-end; 
+        align-items: center; 
+        text-align: right; 
+        margin-top: 10px; 
+        background-color: darkgray;
+        border-radius: 8%;
+        color: whitesmoke;
+}
+
+.archive-button:hover{
+    color: black;
+    background-color: white;
+    
+
+}

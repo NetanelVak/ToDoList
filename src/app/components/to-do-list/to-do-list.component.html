@@ -1,0 +1,27 @@
+<div class="background-container">
+    <div class="container">
+        <button class="archive-button" routerLink="/archive">ארכיון</button>
+
+        <h1>רשימת מטלות</h1>
+        <button (click)="addTask()">הוסף</button>
+        <input [(ngModel)]="newTask" (keydown.enter)="addTask()" placeholder="הוסף משימה חדשה">
+        
+        <h6 class="date" *ngIf="taskDate">{{ taskDate }}</h6>
+        <ul>
+    
+            <li *ngFor="let task of tasks">
+                <button class="remove-button" (click)="removeTask(task)">X</button>
+                <span [ngClass]="{ 'completed' : task.completed}"> {{ task.name }}</span>
+                <input type="checkbox" [(ngModel)]="task.completed" />                    
+            </li>
+        </ul>
+
+        <div class="list-button" *ngIf="tasks.length > 0">
+            <button class="archive-drop-button" (click)="archiveTasks()">העבר לארכיון</button>
+            <button class="clear-list-button" (click)="clearTasks()">נקה רשימה</button>
+        </div>
+
+    </div>
+
+    <!-- <a routerLink="/archive">לעבור לארכיון</a> -->
+</div>
