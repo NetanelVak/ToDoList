@@ -1,3 +1,24 @@
-<button routerLink="/">בית</button>
-<h2>ארכיון משימות</h2>
+<div class="background-container">
+    <div class="container">
+        <button class="home-button" routerLink="/">בית</button>
 
+        <h1>ארכיון מטלות</h1>
+
+        <!-- הוספת תנאי להצגת הגריד רק אם קיימות רשימות בארכיון -->
+        <div class="grid-container" *ngIf="archivedTaskLists.length > 0">
+            <div class="grid-item" *ngFor="let taskList of archivedTaskLists">
+                <h2>{{ taskList.name }}</h2> <!-- שם הרשימה -->
+                <ul class="task-list">
+                    <li *ngFor="let task of taskList.tasks">
+                        {{ task.name }} - {{ task.completed ? 'הושלמה' : 'לא הושלמה' }}
+                        <!-- כפתור למחיקת המטלה -->
+                        <button class="remove-button" (click)="removeTask(taskList.name, task)">X</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- הודעה אם אין מטלות בארכיון -->
+        <p *ngIf="archivedTaskLists.length === 0">אין מטלות בארכיון</p>
+    </div>
+</div>

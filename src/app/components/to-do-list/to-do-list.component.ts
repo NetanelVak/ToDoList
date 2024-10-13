@@ -3,8 +3,15 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { ArchiveComponent } from '../archive/archive.component';
-import { RouterOutlet, RouterModule } from '@angular/router'
+import { RouterOutlet, RouterModule, Routes } from '@angular/router'
+import { Router } from '@angular/router'; // ייבוא ה-Router
+import { DataService } from '../../services/data.service'; // ייבוא השירות
 
+
+
+const routes: Routes = [
+    { path: 'archive', component: ArchiveComponent }, // קומפוננטת הארכיון
+];
 
 @Component({
   selector: 'app-to-do-list',
@@ -14,49 +21,58 @@ import { RouterOutlet, RouterModule } from '@angular/router'
   styleUrls: ['./to-do-list.component.scss']
 })
 export class ToDoListComponent {
-    tasks: {name: string; completed: boolean} [] = [];
+    tasks: { name: string; completed: boolean }[] = [];
     newTask: string = '';
+    taskDate: string | null = null;
+    createDate: string | null = null;
+    isFirstTask: boolean = true;
+    
 
-    taskDate: string | null = null; // משתנה לאחסון התאריך
-    isFirstTask: boolean = true; // משתנה לבדיקת הוספת המשימה הראשונה
+    constructor(private router: Router, private dataService: DataService) {
+        this.tasks = this.dataService.getTasks();
+    }
 
-    archivedTasks: { name: string; completed: boolean }[] = []; //משתנה לארכיון
-
-    //פונקציה להוספת מטלה לרשימה
     addTask() {
         if (this.newTask.trim()) {
             if (this.isFirstTask) {
-                this.taskDate = this.getShortDate(); 
-                this.isFirstTask = false; 
+                this.taskDate = this.getShortDate();
+                
+                this.createDate = this.taskDate; // שמירה של התאריך של הכנסת המשימה הראשונה
+
+                this.isFirstTask = false;
             }
-            this.tasks.push({name: this.newTask, completed: false })
+            const task = { name: this.newTask, completed: false };
+            this.dataService.addTask(task);
             this.newTask = '';
+            this.tasks = this.dataService.getTasks();
         }
     }
 
-    //פונקציה למחיקת מטלה מהרשימה
-
     removeTask(task: { name: string; completed: boolean }) {
         this.tasks = this.tasks.filter(t => t !== task);
+        this.dataService.clearTasks();
+        this.tasks.forEach(t => this.dataService.addTask(t));
     }
-       //פונקצייה לייבוא תאריך
+
+    clearTasks() {
+        this.tasks = [];
+        this.dataService.clearTasks();
+        this.createDate = null; // איפוס התאריך לאחר ניקוי הרשימות
+    }
+
+    archiveTasks() {
+        if (this.tasks.length > 0 && this.createDate) {
+            const archiveName = `${this.createDate}`;
+            this.dataService.archiveTasks(archiveName, this.tasks);
+            this.clearTasks();
+            this.isFirstTask = true;
+            this.createDate = null; // איפוס התאריך לאחר הארכוב
+        }
+    }
+
     getShortDate() {
         const now = new Date();
         const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
         return now.toLocaleDateString('he-IL', options);
     }
-
-    //פונקצייה למחיקת רשימה
-    clearTasks() {
-        this.tasks = [];
-    }
-
-    //פונקצייה להעברת הרשימה לארכיון
-    archiveTasks() {
-        this.archivedTasks.push(...this.tasks);
-        this.tasks = [];
-    }
-    
 }
-
-

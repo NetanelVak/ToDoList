@@ -81,6 +81,14 @@ ul.task-list {
     text-align: right; 
     margin-left: auto; 
     direction: rtl; 
+
+
+/* מסתירים את הקונטיינר לפני שיש משימות */
+    &:ul.task-list.empty {
+    border: none;
+    background: none;
+    padding: 0;
+    }
 }
 
 
@@ -89,23 +97,15 @@ li {
     justify-content: flex-start;
     padding: 5px; 
     border-bottom: 1px solid lightgray;
-    width: 100%; 
+    width: calc(100% - 20px); /* רוחב פחות מ-100% כדי לאפשר רווח */
+    margin: 0 auto; /* ממקם את ה-li במרכז */ 
     text-align: right; 
     direction: rtl; 
-}
-
 /* אין גבול לפריט האחרון */
-li:last-child {
+    &:last-child {
     border-bottom: none;
+    }
 }
-
-/* מסתירים את הקונטיינר לפני שיש משימות */
-ul.task-list.empty {
-    border: none;
-    background: none;
-    padding: 0;
-}
-
 
 .remove-button {
     background: none; 
@@ -114,12 +114,11 @@ ul.task-list.empty {
     font-size: 7px; 
     cursor: pointer; 
     padding: 0; 
-    margin-right: 15px 
-}
+    margin-right: 15px; 
 
-.remove-button:hover {
-    color: red; 
-    
+    &:hover {
+        color: red; 
+    }
 }
 
 .list-button {

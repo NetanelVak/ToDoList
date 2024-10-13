@@ -1,28 +1,33 @@
 <div class="background-container">
     <div class="container">
+        <!-- כפתור ארכיון -->
         <button class="archive-button" routerLink="/archive">ארכיון</button>
 
+        <!-- כותרת -->
         <h1>רשימת מטלות</h1>
-        <button (click)="addTask()">הוסף</button>
+
+        <!-- הוספת משימה חדשה -->
         <input [(ngModel)]="newTask" (keydown.enter)="addTask()" placeholder="הוסף משימה חדשה">
+        <button (click)="addTask()">הוסף</button>
         
+        <!-- הצגת התאריך -->
         <h6 class="date" *ngIf="taskDate">{{ taskDate }}</h6>
+
+        <!-- רשימת משימות -->
         <ul [ngClass]="{'task-list': tasks.length > 0, 'empty': tasks.length === 0}">
-    
             <li *ngFor="let task of tasks">
-                <input type="checkbox" [(ngModel)]="task.completed" />   
-                <span [ngClass]="{ 'completed' : task.completed}"> {{ task.name }}</span>
+                <!-- סימון מטלה כהושלמה -->
+                <input type="checkbox" [(ngModel)]="task.completed" />
+                <span [ngClass]="{ 'completed' : task.completed }">{{ task.name }}</span>
                 <button class="remove-button" (click)="removeTask(task)">X</button>
-                                 
             </li>
         </ul>
 
+        <!-- כפתורים לניקוי רשימה ולהעברה לארכיון -->
         <div class="list-button" *ngIf="tasks.length > 0">
+            <!-- הוספת שדה להזנת שם הרשימה לפני הארכוב -->
             <button class="archive-drop-button" (click)="archiveTasks()">העבר לארכיון</button>
             <button class="clear-list-button" (click)="clearTasks()">נקה רשימה</button>
         </div>
-
     </div>
-
-    <!-- <a routerLink="/archive">לעבור לארכיון</a> -->
 </div>

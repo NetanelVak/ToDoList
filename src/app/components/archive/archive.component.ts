@@ -1,17 +1,27 @@
-import { Component } from '@angular/core'; //משמש להגדרת הקומפוננטה.
-import { FormsModule } from '@angular/forms'; //נדרש כאשר יש לך ניתוב באפליקציה (routing), והוא משמש כמעין מקום לשיבוץ קומפוננטות בהתאם לנתיב.
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ToDoListComponent } from "../to-do-list/to-do-list.component"; 
-import { RouterOutlet, RouterModule } from '@angular/router'
-
+import { RouterOutlet, RouterModule } from '@angular/router';
+import { DataService } from '../../services/data.service'; // ייבוא השירות לניהול המשימות בארכיון
 
 @Component({
   selector: 'app-archive',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule, RouterOutlet, ToDoListComponent],
-  templateUrl: './archive.component.html',
-  styleUrl: './archive.component.scss'
+  imports: [FormsModule, CommonModule, RouterModule, RouterOutlet],
+  templateUrl: './archive.component.html', 
+  styleUrls: ['./archive.component.scss']
+  
 })
 export class ArchiveComponent {
-    archivedTasks: { name: string; completed: boolean }[] = [];
+  archivedTaskLists: { name: string; tasks: { name: string; completed: boolean }[] }[] = [];
+
+  constructor(private dataService: DataService) {
+    this.archivedTaskLists = this.dataService.getArchivedTaskLists(); // קבלת הרשימות שנשמרו בארכיון
+  }
+
+  // פונקציה למחיקת מטלה מרשימה
+  removeTask(taskListName: string, task: { name: string; completed: boolean }) {
+    this.dataService.removeTaskFromArchivedList(taskListName, task); // מחיקת המטלה מהשירות
+    this.archivedTaskLists = this.dataService.getArchivedTaskLists(); // עדכון הרשימות
+  }
 }

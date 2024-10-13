@@ -1,0 +1,155 @@
+@font-face {
+    font-family: 'YehudaCLM';
+    src: url("../../../assets/yehuda/yehudaclm-bold-webfont.woff") format('woff'),
+         url("../../../assets/yehuda/yehudaclm-light-webfont.woff") format('woff');
+    font-weight: bold; 
+    font-style: normal; 
+}
+
+@font-face {
+    font-family: 'YehudaCLM';
+    src: url("../../../assets/yehuda/yehudaclm-light-webfont.woff") format('woff');
+    font-weight: normal; 
+    font-style: normal; 
+}
+
+
+/* הגדרת הקונטיינר עם תמונת רקע */
+.background-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+.background-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../../assets/toDoIlustration.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 8%;
+    z-index: -1; 
+}
+
+
+.container {
+    position: relative;
+    height: 100vh;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    z-index: 1; 
+    font-family: 'YehudaCLM', sans-serif;
+    
+}
+
+
+.home-button {
+
+    display: flex; 
+    justify-content: flex-end; 
+    align-items: center; 
+    text-align: right; 
+    margin-top: 10px; 
+    background-color: darkgray;
+    border-radius: 8%;
+    color: whitesmoke;
+    &:home-button:hover{
+        color: black;
+        background-color: white;
+        }
+}
+
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 עמודות */
+    gap: 10px;
+    display: none; /* ברירת מחדל: לא מוצג */
+    transition: opacity 0.3s ease; /* מעבר חלק ל-opacity */
+    direction: rtl; 
+}
+
+.grid-container:not(:empty) {
+    display: grid; /* כאשר יש פריטים בקונטיינר - הוא מוצג */
+    opacity: 1 /* מבטיח שהגריד ייראה */
+}
+
+.grid-item {
+    background-color: rgba(255, 255, 255, 0.5); /* שקיפות - 50% */
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+ul.task-list {
+    list-style-type: none;
+    padding: 10px;
+    border: 1px solid lightgray; 
+    border-radius: 5px; 
+    background-color: rgba(255, 255, 255, 0.8);
+    margin: 20px 0; 
+    width: fit-content; 
+    text-align: right; 
+    margin-left: auto; 
+    direction: rtl; 
+    &:ul.task-list.empty {
+        border: none;
+        background: none;
+        padding: 0;
+    }
+    
+}
+
+
+li {
+    display: flex;
+    justify-content: flex-start;
+    padding: 5px; 
+    border-bottom: 1px solid lightgray;
+    width: 100%; 
+    text-align: right; 
+    direction: rtl; 
+}
+
+/* אין גבול לפריט האחרון */
+li:last-child {
+    border-bottom: none;
+}
+
+
+.remove-button {
+    background: none; 
+    border: none; 
+    color: darkgray;
+    font-size: 7px; 
+    cursor: pointer; 
+    padding: 0; 
+    margin-right: 15px; 
+
+    &:hover {
+        color: red; 
+    }
+}
+
+
+
+  /* כאשר רוחב המסך קטן מ-800 פיקסלים, השתמש ב-2 עמודות */
+  @media (max-width: 800px) {
+    .grid-container {
+      grid-template-columns: repeat(2, 1fr); /* 2 עמודות */
+    }
+  }
+  
+  /* כאשר רוחב המסך קטן מ-500 פיקסלים, השתמש בעמודה אחת */
+  @media (max-width: 500px) {
+    .grid-container {
+      grid-template-columns: 1fr; /* עמודה אחת */
+    }
+  }
+  
