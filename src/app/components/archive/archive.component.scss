@@ -49,7 +49,6 @@
 
 
 .home-button {
-
     display: flex; 
     justify-content: flex-end; 
     align-items: center; 
@@ -58,10 +57,11 @@
     background-color: darkgray;
     border-radius: 8%;
     color: whitesmoke;
-    &:home-button:hover{
+    &:hover {
         color: black;
         background-color: white;
-        }
+
+    }
 }
 
 

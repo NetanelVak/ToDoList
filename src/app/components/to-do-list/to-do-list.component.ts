@@ -18,7 +18,7 @@ const routes: Routes = [
   standalone: true,
   imports: [FormsModule, CommonModule, DatePipe, RouterModule ,RouterOutlet, ArchiveComponent],
   templateUrl: './to-do-list.component.html',
-  styleUrls: ['./to-do-list.component.scss']
+  styleUrls: ['./to-do-list.component.scss', ]
 })
 export class ToDoListComponent {
     tasks: { name: string; completed: boolean }[] = [];
@@ -45,6 +45,7 @@ export class ToDoListComponent {
             this.dataService.addTask(task);
             this.newTask = '';
             this.tasks = this.dataService.getTasks();
+
         }
     }
 
@@ -52,12 +53,21 @@ export class ToDoListComponent {
         this.tasks = this.tasks.filter(t => t !== task);
         this.dataService.clearTasks();
         this.tasks.forEach(t => this.dataService.addTask(t));
+
+         // איפוס taskDate כאשר נמחקו כל המטלות
+         if (this.tasks.length === 0) {
+            this.taskDate = null; // איפוס התאריך
+            this.isFirstTask = true; // איפוס הדגל של המשימה הראשונה
+        }
+        
     }
 
     clearTasks() {
         this.tasks = [];
         this.dataService.clearTasks();
         this.createDate = null; // איפוס התאריך לאחר ניקוי הרשימות
+        this.taskDate = null; // איפוס התאריך
+        this.isFirstTask = true; // איפוס הדגל של המשימה הראשונה
     }
 
     archiveTasks() {

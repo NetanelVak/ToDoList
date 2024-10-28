@@ -1,14 +1,16 @@
 <div class="background-container">
+    
     <div class="container">
         <!-- כפתור ארכיון -->
         <button class="archive-button" routerLink="/archive">ארכיון</button>
 
         <!-- כותרת -->
         <h1>רשימת מטלות</h1>
+        
 
         <!-- הוספת משימה חדשה -->
         <input [(ngModel)]="newTask" (keydown.enter)="addTask()" placeholder="הוסף משימה חדשה">
-        <button (click)="addTask()">הוסף</button>
+        <button class="input-button" (click)="addTask()">הוסף</button>
         
         <!-- הצגת התאריך -->
         <h6 class="date" *ngIf="taskDate">{{ taskDate }}</h6>

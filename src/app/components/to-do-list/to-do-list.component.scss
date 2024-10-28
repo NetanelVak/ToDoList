@@ -38,7 +38,7 @@
 
 
 .container {
-    position: relatכive;
+    position: relative;
     height: 100vh;
     max-width: 600px;
     margin: 0 auto;
@@ -55,10 +55,11 @@
 
 input {
     direction: rtl; 
-    text-align: right; 
-    padding-right: 50px; 
+    text-align: center; 
+    font-size: 0.5rem;
     box-sizing: border-box; 
-    margin-left: 10px;
+    margin: 10px;
+    text-align: center;
 }
 
 .date{
@@ -101,6 +102,7 @@ li {
     margin: 0 auto; /* ממקם את ה-li במרכז */ 
     text-align: right; 
     direction: rtl; 
+    
 /* אין גבול לפריט האחרון */
     &:last-child {
     border-bottom: none;
@@ -149,8 +151,16 @@ li {
 
 }
 
-.archive-button {
+.input-button {
+    background-color: darkgray;
+    border-radius: 8%;
+    color: whitesmoke;
+    font-size: 0.5rem;
+    
+    
+}
 
+.archive-button {
         display: flex; 
         justify-content: flex-end; 
         align-items: center; 
@@ -159,11 +169,11 @@ li {
         background-color: darkgray;
         border-radius: 8%;
         color: whitesmoke;
-}
-
-.archive-button:hover{
-    color: black;
-    background-color: white;
+        &:hover {
+            color: black;
+            background-color: white;
     
-
+        }
 }
+
+
